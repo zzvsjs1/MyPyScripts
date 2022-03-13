@@ -5,7 +5,7 @@ def do_bubble_sort(in_list: list):
     if len(in_list) < 2:
         return
 
-    print('Original: {}'.format(in_list))
+    print(f'Original: {in_list}')
 
     last = len(in_list)
     while last > 0:
@@ -18,7 +18,7 @@ def do_bubble_sort(in_list: list):
             i += 1
             j += 1
 
-        print('Step {}: {}'.format(len(in_list) - last + 1, in_list))
+        print(f'Step {len(in_list) - last + 1}: {in_list}')
         last -= 1
 
 
@@ -27,7 +27,7 @@ def do_opt_bubble_sort(in_list: list):
 
     # To last - 1
     for i in range(len(in_list) - 1):
-        print('Turn {}: {}'.format(i, in_list))
+        print(f'Turn {i}: {in_list}')
         for j in range(len(in_list) - 1 - i):
             if in_list[j + 1] < in_list[j]:
                 in_list[j + 1], in_list[j] = in_list[j], in_list[j + 1]

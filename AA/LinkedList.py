@@ -20,6 +20,7 @@ class ListNode:
             start = start.prev
 
     def hook(self, first: 'ListNode', last: 'ListNode'):
+        return
         first.prev.next = last.next
         last.next.prev = first.prev
 

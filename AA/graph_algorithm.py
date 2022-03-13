@@ -116,7 +116,7 @@ class GraphAdjListIndirection(MyGraphAdjList):
 
 
 if __name__ == '__main__':
-    g: AbstractGraph = GraphAdjListIndirection()
+    g: GraphAdjListIndirection = GraphAdjListIndirection()
     v = Vertex('a')
     v2 = Vertex('b')
     v3 = Vertex('c')
