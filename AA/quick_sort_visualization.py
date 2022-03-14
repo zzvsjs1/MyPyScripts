@@ -1,4 +1,33 @@
-import subprocess
+import re
+
+counter: int = 0
+
+
+def print_partition(in_list: list, l: int, r: int) -> str:
+    list_str = ['[']
+    for i in range(l):
+        list_str.append(f'{str(in_list[i])}, ')
+
+    list_str.append('[')
+    for i in range(l, r):
+        list_str.append(f'{in_list[i]}, ')
+
+    list_str.append(f'{in_list[r]}]')
+
+    if len(in_list) - 1 != r:
+        list_str.append(', ')
+
+    i_max = len(in_list) - 1
+    i = r + 1
+    while i <= i_max:
+        list_str.append(str(in_list[i]))
+        if i == i_max:
+            break
+        list_str.append(', ')
+        i += 1
+
+    list_str.append(']')
+    return ''.join(list_str)
 
 
 def do_quick_sort(in_list: list, l: int, r: int):
@@ -9,6 +38,7 @@ def do_quick_sort(in_list: list, l: int, r: int):
 
 
 def qsort_impl(in_list: list, l: int, r: int) -> int:
+    global counter
     p = in_list[l]
     i = l
     j = r + 1
@@ -26,17 +56,23 @@ def qsort_impl(in_list: list, l: int, r: int) -> int:
 
         in_list[i], in_list[j] = in_list[j], in_list[i]
 
-        print(in_list)
+        print(f'Step {counter}: {print_partition(in_list, l, r)}')
+        counter += 1
         if i >= j:
             break
 
     in_list[i], in_list[j] = in_list[j], in_list[i]
     in_list[l], in_list[j] = in_list[j], in_list[l]
 
-    print(in_list)
+    print(f'Step {counter}: {print_partition(in_list, l, r)}')
+    counter += 1
     return j
 
 
 if __name__ == "__main__":
-    input_list = [45, 789, 456, -123, 0, 1, 2, 3]
-    do_quick_sort(input_list, 0, len(input_list) - 1)
+    in_str = input('Enter a list of number\n'
+                   'format: 1, 2, 3\n'
+                   'enter: ')
+    m = list(map(int, re.findall(r'\d+|-\d+', in_str)))
+    do_quick_sort(m, 0, len(m) - 1)
+    print(f'Sorted: {m}')
