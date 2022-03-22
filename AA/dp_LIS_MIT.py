@@ -1,10 +1,21 @@
 # MIT 6.006 Introduction to Algorithms, Spring 2020
 # see: https://www.youtube.com/watch?v=r4-cftqTcdI&list=PLUl4u3cNGP63EdVPNLG3ToM6LaEUuStEY&index=42
 
-def solve_suffix(string: str, t: list):
+def solve_suffix(string: str):
+    l = [0] * len(string)
+    max_e1 = 0
     for i in reversed(range(len(string))):
-        t[i] = 1 + max([solve_suffix(string, [0] * (len(string) - 1)) for j in range(i, len(string)) if string[i] < string[j]])
-    return t
+        max_e = 0
+        for j in range(i + 1, len(string)):
+            if string[i] < string[j] and l[j] > max_e:
+                max_e = l[j]
+
+        l[i] = max_e + 1
+        if l[i] > max_e1:
+            max_e1 = l[i]
+
+    print(max_e1)
+
 
 def solve_prefix(string: str):
     pass
@@ -12,6 +23,4 @@ def solve_prefix(string: str):
 
 if __name__ == '__main__':
     my_string = 'CARBOHYDRATE'
-    li = [0] * (len(my_string) + 1)
-    solve_suffix(my_string, li)
-    print(li)
+    solve_suffix(my_string)
