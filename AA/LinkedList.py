@@ -121,7 +121,7 @@ class LinkList:
 
     def remove_if(self, compare) -> int:
         if not callable(compare):
-            raise ValueError('compare is not callable')
+            raise ValueError('COMPARE is not callable')
 
         count: int = 0
         cur: ListNode = self.header.next

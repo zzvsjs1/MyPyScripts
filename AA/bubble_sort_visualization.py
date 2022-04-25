@@ -1,7 +1,13 @@
 import re
 
+COMPARE = 0
+SWAP = 0
+
 
 def do_bubble_sort(in_list: list):
+    global COMPARE
+    global SWAP
+
     if len(in_list) < 2:
         return
 
@@ -14,6 +20,9 @@ def do_bubble_sort(in_list: list):
         while j < last:
             if in_list[i] > in_list[j]:
                 in_list[i], in_list[j] = in_list[j], in_list[i]
+                SWAP += 1
+
+            COMPARE += 1
 
             i += 1
             j += 1
@@ -23,15 +32,19 @@ def do_bubble_sort(in_list: list):
 
 
 def do_opt_bubble_sort(in_list: list):
+    global COMPARE
+    global SWAP
+
     is_swap: bool = False
 
-    # To last - 1
     for i in range(len(in_list) - 1):
         print(f'Turn {i}: {in_list}')
         for j in range(len(in_list) - 1 - i):
             if in_list[j + 1] < in_list[j]:
                 in_list[j + 1], in_list[j] = in_list[j], in_list[j + 1]
                 is_swap = True
+                SWAP += 1
+            COMPARE += 1
 
         if not is_swap:
             return
@@ -44,4 +57,11 @@ if __name__ == "__main__":
                    'format: 1, 2, 3\n'
                    'enter: ')
     m = list(map(int, re.findall(r'\d+|-\d+', in_str)))
-    do_opt_bubble_sort(m)
+
+    if input('opt or n? ').lower() == 'opt':
+        do_opt_bubble_sort(m)
+    else:
+        do_bubble_sort(m)
+
+    print(f'compare: {COMPARE}')
+    print(f'swap: {SWAP}')
