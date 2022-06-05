@@ -4,7 +4,7 @@ from rich.console import Console
 c = Console()
 
 
-def get_index(inl: int):
+def get_index(inl: int) -> list:
     # index = 0
     # ret = []
     # while inl >> index != 0:
@@ -17,6 +17,8 @@ def get_index(inl: int):
 
 
 def solve(a: list, n: int):
+    print()
+
     num = 0
     max_weight = -1
     for i in range(2 ** len(a)):
@@ -28,8 +30,10 @@ def solve(a: list, n: int):
             c.print(f'Subset: {temp} Total weight: {su}', style='red')
             num += 1
 
-    c.print(f'\nTotal subsets: {num}', style='red')
-    c.print(f'Maximum weight {max_weight}', style='red')
+    print()
+    c.print(f'Total subsets (include empty): {num}', style='red')
+    c.print(f'Total subsets (exclude empty): {num - 1}', style='red')
+    c.print(f'Maximum weight: {max_weight}', style='red')
 
 
 if __name__ == '__main__':
