@@ -12,7 +12,7 @@ def solve_sub(ilist: [int], i: int, t: int) -> bool:
     if i == len(ilist):
         return False
 
-    temp: bool = solve_sub(ilist, i + 1, t)
+    temp = solve_sub(ilist, i + 1, t)
     if ilist[i] <= t:
         return temp or solve_sub(ilist, i + 1, t - ilist[i])
 
@@ -20,4 +20,4 @@ def solve_sub(ilist: [int], i: int, t: int) -> bool:
 
 
 if __name__ == '__main__':
-    print(solve([1, 2, 3], 8))
+    print(solve([1, 2, 3, 4], 8))

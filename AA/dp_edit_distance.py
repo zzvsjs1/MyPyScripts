@@ -23,7 +23,7 @@ def solve(word1: str, word2: str) -> list[list[int]]:
 
 if __name__ == "__main__":
     string = input('Enter X Y, split by space: ').split()
-    ans = solve(string[1], string[0])
+    ans = solve(string[0], string[1])
     for i in ans:
         print(i)
 

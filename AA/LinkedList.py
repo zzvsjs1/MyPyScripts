@@ -141,7 +141,6 @@ class LinkList:
         for i in iter:
             self.push_back(i)
 
-
     def merge(self):
         pass
 
@@ -204,7 +203,8 @@ class LinkList:
         return True
 
     def __ne__(self, other):
-        return not(self == other)
+        return not (self == other)
+
 
 class LinkListIterator:
 

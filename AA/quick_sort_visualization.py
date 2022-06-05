@@ -8,7 +8,29 @@ SWAP = 0
 console = Console()
 
 
+def pri(ilist: list, pivot: int):
+    copy = ilist[:pivot]
+    copy2 = ilist[pivot + 1:]
+
+    s = '['
+
+    if len(copy) != 0:
+        s += f'{str(copy)}, '
+
+    s += f'[{ilist[pivot]}]'
+
+    if pivot != len(ilist) - 1:
+        s += ', '
+
+    if len(copy2) != 0:
+        s += str(copy2)
+
+    return s + ']'
+
+
 def do_quick_sort(in_list: list, left: int, right: int):
+    global COMPARES
+    COMPARES += 1
     if left < right:
         pivot = qsort_impl(in_list, left, right)
         do_quick_sort(in_list, left, pivot - 1)
@@ -38,8 +60,11 @@ def qsort_impl(in_list: list, left: int, right: int) -> int:
         SWAP += 1
         in_list[i], in_list[j] = in_list[j], in_list[i]
 
-        print(f'Step {COUNTER}: {in_list}')
+        print(f'Step {COUNTER}: {in_list} Compare: {COMPARES} Swap: {SWAP}')
         COUNTER += 1
+
+        COMPARES += 1
+
         if i >= j:
             break
 
@@ -48,15 +73,17 @@ def qsort_impl(in_list: list, left: int, right: int) -> int:
     in_list[left], in_list[j] = in_list[j], in_list[left]
 
     TURN += 1
-    console.print(f'Step {COUNTER}: {in_list} Range: {left} - {right}  '
-                  f'Turn: {TURN} Pivot: {in_list[j]} in index: {j} '
-                  f'Compare: {COMPARES} Swap: {SWAP}', style='bold red')
+    console.print(f'Step {COUNTER}: {pri(in_list, j)} Range: {left} - {right}  '
+                  f'Turn: {TURN} Pivot: {in_list[j]} in index {j} '
+                  f'Compare: {COMPARES} Swap: {SWAP}', style='red')
+    # console.print(f'Verify {in_list}', style='red')
     COUNTER += 1
     return j
 
 
 if __name__ == "__main__":
     # 15 21 1 25 12 6 8 3 5 19 10 18
+    # 42 30 9 40 4 29 35 40 15 43 45 13
     in_str = input('Enter data\n'
                    'Split by comma or space\n'
                    'enter: ')
@@ -66,5 +93,5 @@ if __name__ == "__main__":
     exec(f'm = list(map({ty}, m))')
 
     do_quick_sort(m, 0, len(m) - 1)
-    print(f'Sorted: {m}')
-    print(f'Swap {SWAP} Compare {COMPARES}')
+    console.print(f'\nSorted: {m}', end='\n\n', style='red')
+    console.print(f'Total Swap {SWAP} Compare {COMPARES}', style='blue')
