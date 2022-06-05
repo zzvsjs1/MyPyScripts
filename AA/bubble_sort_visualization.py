@@ -31,6 +31,47 @@ def do_bubble_sort(in_list: list):
         last -= 1
 
 
+def bubble_s(in_l: []):
+    global COMPARE
+    global SWAP
+
+    step = 0
+    n = len(in_l)
+    for i in range(n - 1):
+        for j in range(n - 2 - i + 1):
+            COMPARE += 1
+            if in_l[j + 1] < in_l[j]:
+                in_l[j], in_l[j + 1] = in_l[j + 1], in_l[j]
+                SWAP += 1
+
+        print(f'Round {step + 1}: {in_l} ', end='')
+        print(f'compare: {COMPARE} swap: {SWAP}')
+        step += 1
+
+
+def bubble_so(in_l: []):
+    global COMPARE
+    global SWAP
+
+    step = 0
+    n = len(in_l)
+    for i in range(n - 1):
+        is_exchanges = False
+        for j in range(n - 2 - i + 1):
+            COMPARE += 1
+            if in_l[j + 1] < in_l[j]:
+                is_exchanges = True
+                in_l[j], in_l[j + 1] = in_l[j + 1], in_l[j]
+                SWAP += 1
+
+        print(f'Round {step + 1}: {in_l} ', end='')
+        print(f'compare: {COMPARE} swap: {SWAP}')
+        step += 1
+
+        if not is_exchanges:
+            return
+
+
 def do_opt_bubble_sort(in_list: list):
     global COMPARE
     global SWAP
@@ -53,15 +94,20 @@ def do_opt_bubble_sort(in_list: list):
 
 
 if __name__ == "__main__":
-    in_str = input('Enter a list of number\n'
-                   'format: 1, 2, 3\n'
+    in_str = input('Enter data\n'
+                   'Split by comma or space\n'
                    'enter: ')
-    m = list(map(int, re.findall(r'\d+|-\d+', in_str)))
 
-    if input('opt or n? ').lower() == 'opt':
-        do_opt_bubble_sort(m)
+    m = [tu for tu in re.findall(r'(-?\w+) *', in_str)]
+    ty = input('Data type: ')
+    exec(f'm = list(map({ty}, m))')
+
+    if input('\nEarly-Termination (y or n)? ').lower() == 'y':
+        print()
+        bubble_so(m)
     else:
-        do_bubble_sort(m)
+        print()
+        bubble_s(m)
 
     print(f'compare: {COMPARE}')
     print(f'swap: {SWAP}')

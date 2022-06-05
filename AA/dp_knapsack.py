@@ -14,7 +14,7 @@ class ValuePair:
         return f'({self.weight} : {self.value})'
 
 
-def solve2(w_and_v: [ValuePair], n: int):
+def solve(w_and_v: [ValuePair], n: int):
     dp = [[0 for _ in range(n + 1)] for _ in range(len(w_and_v) + 1)]
 
     for i in range(1, len(w_and_v) + 1):
@@ -30,17 +30,6 @@ def solve2(w_and_v: [ValuePair], n: int):
     return dp
 
 
-def back_track(dp, w: list[ValuePair], i: int, j: int):
-    if i == 0 and j == 0:
-        return
-
-
-
-    print(w[i])
-    back_track(dp, w, i - 1, j - 1)
-    back_track(dp, w, i - 1, j - w[i].weight)
-
-
 # (3, 25) (2, 20) (1, 15), (4, 40) (5, 50) n = 6
 #
 # Get:
@@ -53,15 +42,20 @@ def back_track(dp, w: list[ValuePair], i: int, j: int):
 if __name__ == '__main__':
     temp: [(int, int)] = [ValuePair(int(d1), int(d2))
                           for d1, d2 in
-                          re.findall(r'\((\d+), (\d+)\)',
+                          re.findall(r'\((\d+), *(\d+)\)',
                                      input('Enter pair of (weight, value): '))]
 
-    dp = solve2(temp, int(input('Enter n: ')))
+    match input('Is (value, weight)? ').lower():
+        case 'y' | 'true' | '1':
+            for each in temp:
+                mi = each.weight
+                each.weight = each.value
+                each.value = mi
+
+    dp = solve(temp, int(input('Enter n|m whatever: ')))
 
     for i in dp:
         print(i)
 
     print()
     print(f'Answer {dp[-1][-1]}')
-
-    #back_track(dp, temp, len(dp) - 1, len(dp[-1]) - 1)

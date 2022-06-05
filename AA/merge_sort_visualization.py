@@ -1,37 +1,61 @@
-def merge_sort(ilist: list):
-    if len(ilist) > 1:
-        b = ilist[:len(ilist) // 2 - 1]
-        c = ilist[len(ilist) // 2:]
-        merge_sort(b)
-        merge_sort(c)
-        merge(b, c, ilist)
+import re
+from rich import console
 
 
-def merge(a: list, b: list, to: list):
+COMPARE = 0
+
+
+def merge_sort(arr: list):
+    if len(arr) > 1:
+        mid = len(arr) // 2
+
+        left = arr[:mid]
+        right = arr[mid:]
+        merge_sort(left)
+        merge_sort(right)
+        merge(left, right, arr)
+
+
+def merge(left: list, right: list, arr: list):
+    global COMPARE
+
     i = 0
     j = 0
-    l = 0
-    while i < len(a) and j < len(b):
-        if a[i] < b[j]:
-            to[l] = a[i]
+    k = 0
+
+    while i < len(left) and j < len(right):
+        if left[i] <= right[j]:
+            arr[k] = left[i]
             i += 1
         else:
-            to[l] = b[j]
+            arr[k] = right[j]
             j += 1
-        l += 1
+        COMPARE += 1
+        k += 1
 
-    if i != len(a):
-        for k in range(i, len(a)):
-            to[l] = a[k]
-            l += 1
-
-    if j != len(a):
-        for k in range(j, len(b)):
-            to[l] = a[k]
-            l += 1
+    if i == len(left):
+        while j < len(right):
+            arr[k] = right[j]
+            j += 1
+            k += 1
+    else:
+        while i < len(left):
+            arr[k] = left[i]
+            i += 1
+            k += 1
 
 
 if __name__ == '__main__':
-    li = list(reversed(range(10)))
-    merge_sort(li)
-    print(li)
+    # 15 21 1 25 12 6 8 3 5 19 10 18
+    c = console.Console()
+    c.print('Merge sort is a stable sorting method.', style='bold red')
+    in_str = input('Enter data\n'
+                   'Split by comma or space\n'
+                   'enter: ')
+
+    m = [tu for tu in re.findall(r'(-?\w+) *', in_str)]
+    ty = input('Data type: ')
+    exec(f'm = list(map({ty}, m))')
+    merge_sort(m)
+    print(m)
+    print(f'Compare {COMPARE}')

@@ -11,12 +11,6 @@ def solve(a: list) -> list:
     return a
 
 
-def do(n):
-    while True:
-        n += 1
-        yield n
-
-
 if __name__ == "__main__":
     in_str = input('Enter a list of number\n'
                    'format: 1, 2, 3\n'
