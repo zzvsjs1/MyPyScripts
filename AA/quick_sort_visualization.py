@@ -1,4 +1,5 @@
 import re
+from io import StringIO
 from rich.console import Console
 
 COUNTER: int = 0
@@ -12,20 +13,21 @@ def pri(ilist: list, pivot: int):
     copy = ilist[:pivot]
     copy2 = ilist[pivot + 1:]
 
-    s = '['
+    ss = StringIO()
+    ss.write('[')
 
     if len(copy) != 0:
-        s += f'{str(copy)}, '
+        ss.write(f'{str(copy)}, ')
 
-    s += f'[{ilist[pivot]}]'
+    ss.write(f'[{ilist[pivot]}]')
 
     if pivot != len(ilist) - 1:
-        s += ', '
+        ss.write(', ')
 
     if len(copy2) != 0:
-        s += str(copy2)
-
-    return s + ']'
+        ss.write(str(copy2))
+    ss.write(']')
+    return ss.getvalue()
 
 
 def do_quick_sort(in_list: list, left: int, right: int):

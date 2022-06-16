@@ -244,4 +244,4 @@ class LinkListReverseIterator:
 
 if __name__ == '__main__':
     my_list = reversed(LinkList(range(20)))
-    print(my_list)
+    print(list(my_list))
