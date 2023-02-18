@@ -21,6 +21,7 @@ def good_method(data: []):
     return _max
 
 
-d = [-2, 11, -4, 13, -5, -2]
-print(silly_method(d))
-print(good_method(d))
+if __name__ == '__main__':
+    d = [-2, 11, -4, 13, -5, -2]
+    print(silly_method(d))
+    print(good_method(d))
