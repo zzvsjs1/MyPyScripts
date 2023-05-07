@@ -14,4 +14,3 @@ while True:
     print()
     print(ret)
     print()
-gi
