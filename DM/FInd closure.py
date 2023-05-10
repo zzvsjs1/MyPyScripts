@@ -146,6 +146,9 @@ if __name__ == '__main__':
         print(f'Symmetric: \n {symmetric_result}\n')
         print(f'Transitive: \n {transitive_result}\n')
         print(f'Equivalence: \n {equivalence_res}\n')
+        print(f'Is Reflexive: {len(reflexive_result) == 0}')
+        print(f'Is Symmetric: {len(symmetric_result) == 0}')
+        print(f'Is Transitive: {len(transitive_result) == 0}')
         print()
         # break
 
