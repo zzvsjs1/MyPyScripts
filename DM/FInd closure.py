@@ -5,7 +5,7 @@ from typing import List, Set, Tuple
 A_DEGIT = ord('a')
 
 
-def find_reflexive(m: List[List[int]]) -> Set[Tuple[str, str]]:
+def find_reflexive(m: list[list[int]]) -> Set[Tuple[str, str]]:
     assert len(m) > 0
     ret = set()
     for i in range(len(m)):
@@ -45,7 +45,9 @@ def find_transitive(m: List[List[int]]) -> np.ndarray:
 
 
 def set_tuple_list_to_2d_list(var: List[tuple[str, str]]) -> tuple[set[str], [[str]]]:
-    s = set()
+    # s = set()
+    s = {'a', 'b', 'c', 'd'}
+
     for i in var:
         for j in i:
             s.add(j)
@@ -104,7 +106,6 @@ def assign_set_to_matrix(l: [Tuple[str, str]], n: int):
 if __name__ == '__main__':
     while True:
         input_list_tuple = pass_set(input('Enter sets: '))
-        # input_list_tuple = pass_set('{(a,a),(b,a),(b,c),(c,c),(c,d),(d,d)}')
 
         input_list_tuple_set = set(input_list_tuple)
 
@@ -151,4 +152,3 @@ if __name__ == '__main__':
         print(f'Is Transitive: {len(transitive_result) == 0}')
         print()
         # break
-
